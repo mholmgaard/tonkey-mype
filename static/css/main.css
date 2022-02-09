@@ -6,8 +6,8 @@ html{
 }
 
 body {
-    background-color: black;
-    color: white;
+    background-color: #101216;
+    color: #C0CAD3;
     height: 100%;
     display:flex;
     flex-direction: row;
