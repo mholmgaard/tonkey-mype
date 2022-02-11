@@ -1,5 +1,6 @@
 $(function() {
-    let listOfWords = ["reinsures","leftward","gids","wae","thrashings","freehanded","disentangling","endoskeleton","dameworts","maes","inculcations","whams"].join(" ");
+    let listOfWords = ["escapable","parallactic","pigsticker","superhardened","cresyls","pastrami","regularizes","apocopate","verdancy","nonconcurring","simonizing","vitreouses","percept","pietisms","miniscules","unriddling","cental","eyass","esnes","outheard","cryogens","yokels","preorders","crustacea","protuberant","squalled","kroon"]
+                        .join(" ");
     let div = $("#words");
 
     for (let i = 0; i < listOfWords.length; i++) {
@@ -11,18 +12,19 @@ $(function() {
         }
     }
 
-    // TODO: Add each word it its own div. If div contains the wrong class, word is not correct.
+    // TODO: Add each word it its own div. If div contains the 'wrong' class, word is not correct.
 
     let index = 0;
 
     $(window).on('keydown', function(event) {
-        let charSpan = $("#" + index);
-
-        // space keycode 32
         if (event.which === 8) {
+            let charSpan = $("#" + (index - 1));
             charSpan.removeClass();
             if (index > 0) index--;
+            return;
         }
+
+        let charSpan = $("#" + index);
 
         if (event.which === 32) {
             if (charSpan.html() === " ") {
@@ -31,6 +33,7 @@ $(function() {
                 charSpan.addClass('wrong');
                 index++;
             }
+            return;
         }
 
         if (event.which >= 65 && event.which <= 90) {

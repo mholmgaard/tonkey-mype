@@ -7,7 +7,7 @@ html{
 
 body {
     background-color: #101216;
-    color: #C0CAD3;
+    color: #73797E;
     height: 100%;
     display:flex;
     flex-direction: row;
@@ -21,19 +21,25 @@ body {
 .oblique{font-style: oblique;}
 
 #words {
-   width: 1000px;
-   height: 220px;
-   font-size: 48px;
+   width: 1200px;
+   height: 200px;
+   font-size: 28px;
 }
 
 .correct {
-    color: #3B7937;
+    color: #37393C;
 }
 
 .wrong {
-    color: #CA4B2D;
+    color: #E8D85E;
+    text-shadow: 0 0 4px #d0c254;
 }
 
 h1 {
     text-align: center;
+    -webkit-transition: text-shadow 0.2s linear;
+    -moz-transition: text-shadow 0.2s linear;
+    -ms-transition: text-shadow 0.2s linear;
+    -o-transition: text-shadow 0.2s linear;
+    transition: text-shadow 0.2s linear;
 }
