@@ -5,11 +5,7 @@ $(function() {
 
     for (let i = 0; i < listOfWords.length; i++) {
         let char = listOfWords.charAt(i);
-        if (char === " ") {
-            div.append($('<span />').attr("id", i).html(char));
-        } else {
-            div.append($('<span />').attr("id", i).html(char));
-        }
+        div.append($('<span />').attr("id", i).html(char));
     }
 
     // TODO: Add each word it its own div. If div contains the 'wrong' class, word is not correct.
