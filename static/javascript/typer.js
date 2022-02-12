@@ -44,6 +44,7 @@ $(function() {
             if (charSpan.html() === char) {
                 correct(charSpan);
             } else {
+                // TODO: Show error if incorrect character at spaces
                 wrong(charSpan);
             }
             moveCursor(charSpan, true);
