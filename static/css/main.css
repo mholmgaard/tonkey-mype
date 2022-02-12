@@ -43,3 +43,20 @@ h1 {
     -o-transition: text-shadow 0.2s linear;
     transition: text-shadow 0.2s linear;
 }
+
+
+#cursor {
+  position: absolute;
+  background: #d85ee8;
+  margin-left: -3px;
+  -webkit-animation: blink 1.0s infinite;
+  width: 2px;
+  height: 32px;
+}
+
+@-webkit-keyframes blink {
+  0% {background: #222}
+  50% {background: #d85ee8}
+  100% {background: #222}
+}
+
