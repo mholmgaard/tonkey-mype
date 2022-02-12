@@ -1,10 +1,11 @@
 $(function() {
     let listOfWords = ["escapable","parallactic","pigsticker","superhardened","cresyls","pastrami","regularizes","apocopate","verdancy","nonconcurring","simonizing","vitreouses","percept","pietisms","miniscules","unriddling","cental","eyass","esnes","outheard","cryogens","yokels","preorders","crustacea","protuberant","squalled","kroon"]
                         .join(" ");
-    let div = $("#words");
+    const div = $("#words");
+    const cursor = $("#cursor");
 
     for (let i = 0; i < listOfWords.length; i++) {
-        let char = listOfWords.charAt(i);
+        const char = listOfWords.charAt(i);
         div.append($('<span />').attr("id", i).html(char));
     }
 
@@ -14,15 +15,18 @@ $(function() {
     let mistakes = 0;
 
     $(window).on('keydown', function(event) {
+        // Backspace
         if (event.which === 8) {
-            let charSpan = $("#" + (index - 1));
+            const charSpan = $("#" + (index - 1));
             charSpan.removeClass();
             if (index > 0) index--;
+            moveCursor(charSpan);
             return;
         }
 
         let charSpan = $("#" + index);
 
+        // Space
         if (event.which === 32) {
             if (charSpan.html() === " ") {
                 index++;
@@ -30,16 +34,19 @@ $(function() {
                 wrong(charSpan);
                 index++;
             }
+            moveCursor(charSpan);
             return;
         }
 
+        // a-z
         if (event.which >= 65 && event.which <= 90) {
-            let char = String.fromCharCode(event.which).toLowerCase();
+            const char = String.fromCharCode(event.which).toLowerCase();
             if (charSpan.html() === char) {
-                charSpan.addClass('correct');
+                correct(charSpan);
             } else {
                 wrong(charSpan);
             }
+            moveCursor(charSpan);
             index++;
         }
     });
@@ -47,5 +54,13 @@ $(function() {
     function wrong(charSpan) {
         charSpan.addClass('wrong');
         mistakes++;
+    }
+
+    function correct(charSpan) {
+        charSpan.addClass('correct');
+    }
+
+    function moveCursor(charSpan) {
+        cursor.insertAfter(charSpan);
     }
 });

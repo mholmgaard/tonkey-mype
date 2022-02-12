@@ -46,8 +46,7 @@ h1 {
 
 
 #cursor {
-  position: absolute;
-  background: #d85ee8;
+  background: #E8D85E;
   margin-left: -3px;
   -webkit-animation: blink 1.0s infinite;
   width: 2px;
@@ -56,7 +55,7 @@ h1 {
 
 @-webkit-keyframes blink {
   0% {background: #222}
-  50% {background: #d85ee8}
+  50% {background: #E8D85E}
   100% {background: #222}
 }
 
