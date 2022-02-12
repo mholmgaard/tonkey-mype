@@ -17,6 +17,7 @@ $(function() {
     $(window).on('keydown', function(event) {
         // Backspace
         if (event.which === 8) {
+        // TODO: Skip entire word if CTRL is held
             const charSpan = $("#" + (index - 1));
             charSpan.removeClass();
             if (index > 0) index--;
