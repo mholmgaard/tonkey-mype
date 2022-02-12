@@ -11,6 +11,7 @@ $(function() {
     // TODO: Add each word it its own div. If div contains the 'wrong' class, word is not correct.
 
     let index = 0;
+    let mistakes = 0;
 
     $(window).on('keydown', function(event) {
         if (event.which === 8) {
@@ -26,7 +27,7 @@ $(function() {
             if (charSpan.html() === " ") {
                 index++;
             } else {
-                charSpan.addClass('wrong');
+                wrong(charSpan);
                 index++;
             }
             return;
@@ -37,9 +38,14 @@ $(function() {
             if (charSpan.html() === char) {
                 charSpan.addClass('correct');
             } else {
-                charSpan.addClass('wrong');
+                wrong(charSpan);
             }
             index++;
         }
     });
+
+    function wrong(charSpan) {
+        charSpan.addClass('wrong');
+        mistakes++;
+    }
 });
