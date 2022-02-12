@@ -20,7 +20,7 @@ $(function() {
             const charSpan = $("#" + (index - 1));
             charSpan.removeClass();
             if (index > 0) index--;
-            moveCursor(charSpan);
+            moveCursor(charSpan, false);
             return;
         }
 
@@ -34,7 +34,7 @@ $(function() {
                 wrong(charSpan);
                 index++;
             }
-            moveCursor(charSpan);
+            moveCursor(charSpan, true);
             return;
         }
 
@@ -46,7 +46,7 @@ $(function() {
             } else {
                 wrong(charSpan);
             }
-            moveCursor(charSpan);
+            moveCursor(charSpan, true);
             index++;
         }
     });
@@ -60,7 +60,11 @@ $(function() {
         charSpan.addClass('correct');
     }
 
-    function moveCursor(charSpan) {
-        cursor.insertAfter(charSpan);
+    function moveCursor(charSpan, after) {
+        if (after) {
+            cursor.insertAfter(charSpan);
+        } else {
+            cursor.insertBefore(charSpan);
+        }
     }
 });

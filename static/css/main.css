@@ -44,18 +44,16 @@ h1 {
     transition: text-shadow 0.2s linear;
 }
 
-
 #cursor {
-  background: #E8D85E;
-  margin-left: -3px;
-  -webkit-animation: blink 1.0s infinite;
-  width: 2px;
-  height: 32px;
+    position: absolute;
+    color: #E8D85E;
+    margin-left: -5px;
+    -webkit-animation: blink 0.8s infinite;
 }
 
 @-webkit-keyframes blink {
-  0% {background: #222}
-  50% {background: #E8D85E}
-  100% {background: #222}
+    0% {color: #222}
+    50% {color: #E8D85E}
+    100% {color: #222}
 }
 
