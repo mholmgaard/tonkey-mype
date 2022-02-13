@@ -1,10 +1,7 @@
 $(function() {
-    let listOfWords = ["escapable","parallactic","pigsticker","superhardened","cresyls","pastrami","regularizes","apocopate","verdancy","nonconcurring","simonizing","vitreouses","percept","pietisms","miniscules","unriddling","cental","eyass","esnes","outheard","cryogens","yokels","preorders","crustacea","protuberant","squalled","kroon"]
+    const cursor = jQuery('<span>', { id: "cursor", text: "|"});
+    const listOfWords = ["escapable","parallactic","pigsticker","superhardened","cresyls","pastrami","regularizes","apocopate","verdancy","nonconcurring","simonizing","vitreouses","percept","pietisms","miniscules","unriddling","cental","eyass","esnes","outheard","cryogens","yokels","preorders","crustacea","protuberant","squalled","kroon"]
     const wordsDiv = $("#words");
-    const cursor = jQuery('<span>', {
-        id: "cursor",
-        text: "|"
-    });
     let currentLetters = [];
     let wordIndex = 0;
 
@@ -26,8 +23,6 @@ $(function() {
                 id: words[i],
                 class: "word",
             }).appendTo(wordsDiv);
-            if (i === 0) $(`#${word}`).addClass('active');
-            
     
             // Append each word with a span of its chars
             for (let j = 0; j < word.length; j++) {
@@ -74,6 +69,9 @@ $(function() {
     }
 
     function space() {
+        if (!isWordCorrect(listOfWords[wordIndex])) {
+            getWordDiv(wordIndex).addClass('underline');
+        }
         wordIndex++;
         lettersInWord(wordIndex);
         letterIndex = 0;
@@ -84,6 +82,8 @@ $(function() {
         if (letterIndex === 0 && wordIndex > 0) {
             if (!isWordCorrect(listOfWords[wordIndex - 1])) {
                 wordIndex--;
+                // TODO: Move cursor after last letter typed (before first blank).
+                getWordDiv(wordIndex).removeClass('underline');
                 lettersInWord(wordIndex);
                 letterIndex = currentLetters.length;
                 moveCursor(currentLetters[currentLetters.length - 1], true);
@@ -95,6 +95,10 @@ $(function() {
             if (letterIndex > 0) letterIndex--;
             moveCursor(prevLetter, false);
         }
+    }
+
+    function getWordDiv(wordIndex) {
+        return $(`#${listOfWords[wordIndex]}`);
     }
 
     function correct(letter) {
