@@ -1,7 +1,10 @@
 $(function() {
     let listOfWords = ["escapable","parallactic","pigsticker","superhardened","cresyls","pastrami","regularizes","apocopate","verdancy","nonconcurring","simonizing","vitreouses","percept","pietisms","miniscules","unriddling","cental","eyass","esnes","outheard","cryogens","yokels","preorders","crustacea","protuberant","squalled","kroon"]
     const wordsDiv = $("#words");
-    const cursor = $("#cursor");
+    const cursor = jQuery('<span>', {
+        id: "cursor",
+        text: "|"
+    });
     let currentLetters = [];
     let wordIndex = 0;
 
