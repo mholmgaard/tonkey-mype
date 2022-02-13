@@ -1,7 +1,7 @@
 $(function() {
     var timeleft = 30 -1;
     const timer = $("#timer");
-    var downloadTimer = setInterval(function(){
+    setInterval(function(){
     if(timeleft >= 0){
         timer.html(timeleft);
     }
