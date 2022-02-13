@@ -108,6 +108,6 @@ $(function() {
     }
 
     function isWordCorrect(word) {
-        return ($(`#${word}`).find('.incorrect').length <= 0);
+        return ($(`#${word}`).find('.correct').length  === word.length);
     }
 });
