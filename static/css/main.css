@@ -6,13 +6,17 @@ html{
 }
 
 body {
-    background-color: #101216;
-    color: #73797E;
+    background-color: #1C1C1E;
+    color: #d5d6d8;
     height: 100%;
     display:flex;
     flex-direction: row;
     justify-content:center;
     align-items:center;
+    font-size: 28px;
+}
+.single-word-div {
+    display: inline-block;
 }
 
 *{font-family: 'Fira Sans', sans-serif;}
@@ -23,37 +27,29 @@ body {
 #words {
    width: 1200px;
    height: 200px;
-   font-size: 28px;
 }
 
 .correct {
-    color: #37393C;
+    color: #353538;
 }
 
 .wrong {
-    color: #E8D85E;
-    text-shadow: 0 0 4px #d0c254;
-}
-
-h1 {
-    text-align: center;
-    -webkit-transition: text-shadow 0.2s linear;
-    -moz-transition: text-shadow 0.2s linear;
-    -ms-transition: text-shadow 0.2s linear;
-    -o-transition: text-shadow 0.2s linear;
-    transition: text-shadow 0.2s linear;
+    color: #53b082;
+    text-shadow: 0 0 4px #53b082;
 }
 
 #cursor {
     position: absolute;
-    color: #E8D85E;
-    margin-left: -5px;
-    -webkit-animation: blink 0.8s infinite;
+    color: #53b082;
+    margin-left: -5.5px;
+    -webkit-animation: 1s blink step-end infinite;
 }
 
-@-webkit-keyframes blink {
-    0% {color: #222}
-    50% {color: #E8D85E}
-    100% {color: #222}
+@-webkit-keyframes "blink" {
+    from, to {
+        color: #53b082;
+    }
+    50% {
+        color: transparent;
+    }
 }
-
