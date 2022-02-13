@@ -15,6 +15,7 @@ body {
     align-items:center;
     font-size: 28px;
 }
+
 .single-word-div {
     display: inline-block;
 }
@@ -42,10 +43,10 @@ body {
     position: absolute;
     color: #53b082;
     margin-left: -5.5px;
-    -webkit-animation: 1s blink step-end infinite;
+    animation: 1s blink step-end infinite;
 }
 
-@-webkit-keyframes "blink" {
+@keyframes blink {
     from, to {
         color: #53b082;
     }
