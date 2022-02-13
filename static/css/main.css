@@ -7,7 +7,7 @@ html{
 
 body {
     background-color: #1C1C1E;
-    color: #d5d6d8;
+    color: #323234;
     height: 100%;
     display:flex;
     flex-direction: row;
@@ -37,7 +37,7 @@ body {
 }
 
 .correct {
-    color: #353538;
+    color: #d5d6d8;
 }
 
 .incorrect {
