@@ -16,8 +16,14 @@ body {
     font-size: 28px;
 }
 
-.single-word-div {
+#timer {
+    color: #53b082;
+    margin: 4px;
+}
+
+.word {
     display: inline-block;
+    margin: 4px;
 }
 
 *{font-family: 'Fira Sans', sans-serif;}
@@ -34,15 +40,15 @@ body {
     color: #353538;
 }
 
-.wrong {
+.incorrect {
     color: #53b082;
     text-shadow: 0 0 4px #53b082;
 }
 
 #cursor {
+    margin-left: -5.5px;
     position: absolute;
     color: #53b082;
-    margin-left: -5.5px;
     animation: 1s blink step-end infinite;
 }
 
