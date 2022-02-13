@@ -21,14 +21,14 @@ $(function() {
             // Create div for each word
             jQuery('<div>', {
                 id: words[i],
-                class: "word",
+                class: 'word',
             }).appendTo(wordsDiv);
     
             // Append each word with a span of its chars
             for (let j = 0; j < word.length; j++) {
                 const char = word.charAt(j);
                 jQuery('<letter>', {
-                    text: char,
+                    text: char
                 }).appendTo($(`#${word}`));
             }
         }
@@ -39,6 +39,8 @@ $(function() {
     }
     
     let mistakes = 0;
+    let correctWords = 0;
+
     let letterIndex = 0;
 
     $(window).on('keydown', function(event) {
@@ -47,12 +49,10 @@ $(function() {
             type(event);
         }
 
-        // Space
         if (event.which === 32) {
             space();
         }
 
-        // Backspace
         if (event.which === 8) {
             backspace();
         }
@@ -67,9 +67,8 @@ $(function() {
     }
 
     function space() {
-        if (!isWordCorrect(listOfWords[wordIndex])) {
-            getWordDiv(wordIndex).addClass('underline');
-        }
+        if (!isWordCorrect(listOfWords[wordIndex])) getWordDiv(wordIndex).addClass('underline');
+        if (isWordCorrect) correctWords++;
         wordIndex++;
         lettersInWord(wordIndex);
         letterIndex = 0;
@@ -80,11 +79,12 @@ $(function() {
         if (letterIndex === 0 && wordIndex > 0) {
             if (!isWordCorrect(listOfWords[wordIndex - 1])) {
                 wordIndex--;
-                // TODO: Move cursor after last letter typed (before first blank).
                 getWordDiv(wordIndex).removeClass('underline');
                 lettersInWord(wordIndex);
                 letterIndex = currentLetters.length;
-                moveCursor(currentLetters[currentLetters.length - 1], true);
+                const correctLetters = getWordDiv(wordIndex).find('.correct, .incorrect');
+                letterIndex = correctLetters.length;
+                moveCursor(correctLetters[correctLetters.length - 1], true);
             }
         } else {
             // TODO: Skip entire word if CTRL is held
