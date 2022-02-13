@@ -44,7 +44,7 @@ $(function() {
     $(window).on('keydown', function(event) {
         // a-z
         if (event.which >= 65 && event.which <= 90) {
-            type();
+            type(event);
         }
 
         // Space
@@ -58,7 +58,7 @@ $(function() {
         }
     });
 
-    function type() {
+    function type(event) {
         let letter = $(currentLetters[letterIndex]);
         const char = String.fromCharCode(event.which).toLowerCase();
         (letter.text() === char) ? correct(letter) : incorrect(letter);
