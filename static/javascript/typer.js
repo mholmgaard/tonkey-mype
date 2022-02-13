@@ -37,8 +37,6 @@ $(function() {
     function lettersInWord(index) {
         currentLetters = $(`#${listOfWords[index]}`).find('letter');
     }
-
-    // TODO: If div contains the 'incorrect' class, word is not correct.
     
     let mistakes = 0;
     let letterIndex = 0;
