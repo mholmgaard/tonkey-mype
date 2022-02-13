@@ -3,12 +3,12 @@
 ## Setup
 ```commandline
 $ . venv/bin/activate  
-$ export FLASK_APP=hello
+$ export FLASK_APP=pomelo
 ```
 
 ## How to run
 ```commandline
-$ export FLASK_APP=hello
+$ export FLASK_APP=pomelo
 $ flask run
 ```
 
