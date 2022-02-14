@@ -234,8 +234,8 @@ $(function() {
         }
     }
 
-    function lettersInWord(index) {
-        currentLetters = $(`#${listOfWords[index]}`).find('letter');
+    function lettersInWord(wordIndex) {
+        currentLetters = getWordDiv(wordIndex).find('letter');
     }
     
     let mistakes = 0;
@@ -259,7 +259,7 @@ $(function() {
     });
 
     function type(event) {
-        if (!wordIsFinished(listOfWords[wordIndex])) {
+        if (!wordIsFinished(wordIndex)) {
             let letter = $(currentLetters[letterIndex]);
             const char = String.fromCharCode(event.which).toLowerCase();
             (letter.text() === char) ? correct(letter) : incorrect(letter);
@@ -269,8 +269,8 @@ $(function() {
     }
 
     function space() {
-        if (wordIsStarted(listOfWords[wordIndex])) {
-            if (!isWordCorrect(listOfWords[wordIndex])) {
+        if (wordIsStarted(wordIndex)) {
+            if (!isWordCorrect(wordIndex)) {
                 getWordDiv(wordIndex).addClass('underline');
             } else {
                 correctWords++
@@ -284,15 +284,15 @@ $(function() {
 
     function backspace() {
         if (letterIndex === 0 && wordIndex > 0) {
-            if (!isWordCorrect(listOfWords[wordIndex - 1])) {
+            if (!isWordCorrect(wordIndex - 1)) {
                 wordIndex--;
                 getWordDiv(wordIndex).removeClass('underline');
                 lettersInWord(wordIndex);
                 letterIndex = currentLetters.length;
                 // TODO: Fix bug with one-letter word
-                const correctLetters = getWordDiv(wordIndex).find('.correct, .incorrect');
-                letterIndex = correctLetters.length;
-                moveCursor(correctLetters[correctLetters.length - 1], true);
+                const lettersTyped = getClassesInWord(wordIndex);
+                letterIndex = lettersTyped.length;
+                moveCursor(lettersTyped[lettersTyped.length - 1], true);
             }
         } else {
             // TODO: Skip entire word if CTRL is held
@@ -301,10 +301,6 @@ $(function() {
             if (letterIndex > 0) letterIndex--;
             moveCursor(prevLetter, false);
         }
-    }
-
-    function getWordDiv(wordIndex) {
-        return $(`#${listOfWords[wordIndex]}`);
     }
 
     function correct(letter) {
@@ -320,15 +316,24 @@ $(function() {
         (after) ? cursor.insertAfter(letter) : cursor.insertBefore(letter);
     }
 
-    function isWordCorrect(word) {
-        return ($(`#${word}`).find('.correct').length  === word.length);
+    function getWordDiv(wordIndex) {
+        return $(`#${listOfWords[wordIndex]}`);
     }
 
-    function wordIsStarted(word) {
-        return ($(`#${word}`).find('.correct, .incorrect').length > 0);
+    function isWordCorrect(wordIndex) {
+        const wordDiv = getWordDiv(wordIndex);
+        return wordDiv.find('.correct').length  === wordDiv.attr('id').length;
     }
 
-    function wordIsFinished(word) {
-        return ($(`#${word}`).find('.correct, .incorrect').length  === word.length);
+    function wordIsFinished(wordIndex) {
+        return getClassesInWord(wordIndex).length  === getWordDiv(wordIndex).attr('id').length;
+    }
+
+    function getClassesInWord(wordIndex) {
+        return getWordDiv(wordIndex).find('.correct, .incorrect');
+    }
+
+    function wordIsStarted(wordIndex) {
+        return getClassesInWord(wordIndex).length > 0;
     }
 });
