@@ -259,20 +259,27 @@ $(function() {
     });
 
     function type(event) {
-        let letter = $(currentLetters[letterIndex]);
-        const char = String.fromCharCode(event.which).toLowerCase();
-        (letter.text() === char) ? correct(letter) : incorrect(letter);
-        letterIndex++;
-        moveCursor(letter, true);
+        if (!wordIsFinished(listOfWords[wordIndex])) {
+            let letter = $(currentLetters[letterIndex]);
+            const char = String.fromCharCode(event.which).toLowerCase();
+            (letter.text() === char) ? correct(letter) : incorrect(letter);
+            letterIndex++;
+            moveCursor(letter, true);
+        }
     }
 
     function space() {
-        if (!isWordCorrect(listOfWords[wordIndex])) getWordDiv(wordIndex).addClass('underline');
-        if (isWordCorrect) correctWords++;
-        wordIndex++;
-        lettersInWord(wordIndex);
-        letterIndex = 0;
-        moveCursor(currentLetters[0], false);
+        if (wordIsStarted(listOfWords[wordIndex])) {
+            if (!isWordCorrect(listOfWords[wordIndex])) {
+                getWordDiv(wordIndex).addClass('underline');
+            } else {
+                correctWords++
+            }
+            wordIndex++;
+            lettersInWord(wordIndex);
+            letterIndex = 0;
+            moveCursor(currentLetters[0], false);
+        }
     }
 
     function backspace() {
@@ -282,6 +289,7 @@ $(function() {
                 getWordDiv(wordIndex).removeClass('underline');
                 lettersInWord(wordIndex);
                 letterIndex = currentLetters.length;
+                // TODO: Fix bug with one-letter word
                 const correctLetters = getWordDiv(wordIndex).find('.correct, .incorrect');
                 letterIndex = correctLetters.length;
                 moveCursor(correctLetters[correctLetters.length - 1], true);
@@ -314,5 +322,13 @@ $(function() {
 
     function isWordCorrect(word) {
         return ($(`#${word}`).find('.correct').length  === word.length);
+    }
+
+    function wordIsStarted(word) {
+        return ($(`#${word}`).find('.correct, incorrect').length > 0);
+    }
+
+    function wordIsFinished(word) {
+        return ($(`#${word}`).find('.correct, incorrect').length  === word.length);
     }
 });
