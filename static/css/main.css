@@ -48,7 +48,7 @@ body {
 
 .incorrect {
     color: #D33A2D;
-    text-shadow: 0 0 4px #D33A2D;
+    /* text-shadow: 0 0 4px #D33A2D; */
 }
 
 #cursor {
