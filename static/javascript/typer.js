@@ -289,7 +289,6 @@ $(function() {
                 getWordDiv(wordIndex).removeClass('underline');
                 lettersInWord(wordIndex);
                 letterIndex = currentLetters.length;
-                // TODO: Fix bug with one-letter word
                 const lettersTyped = getClassesInWord(wordIndex);
                 letterIndex = lettersTyped.length;
                 moveCursor(lettersTyped[lettersTyped.length - 1], true);
