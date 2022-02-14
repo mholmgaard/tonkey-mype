@@ -325,10 +325,10 @@ $(function() {
     }
 
     function wordIsStarted(word) {
-        return ($(`#${word}`).find('.correct, incorrect').length > 0);
+        return ($(`#${word}`).find('.correct, .incorrect').length > 0);
     }
 
     function wordIsFinished(word) {
-        return ($(`#${word}`).find('.correct, incorrect').length  === word.length);
+        return ($(`#${word}`).find('.correct, .incorrect').length  === word.length);
     }
 });
