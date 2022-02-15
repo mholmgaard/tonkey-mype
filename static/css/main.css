@@ -38,8 +38,9 @@ body {
 .oblique{font-style: oblique;}
 
 #words {
-   width: 1200px;
-   height: 200px;
+   width: 900px;
+   height: 140px;
+   overflow: hidden;
 }
 
 .correct {
