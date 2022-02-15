@@ -241,8 +241,6 @@ $(function() {
     let mistakes = 0;
     let correctWords = 0;
 
-    let letterIndex = 0;
-
     $(window).on('keydown', function(event) {
         // a-z
         if (event.which >= 65 && event.which <= 90) {
@@ -260,10 +258,9 @@ $(function() {
 
     function type(event) {
         if (!wordIsFinished(wordIndex)) {
-            let letter = $(currentLetters[letterIndex]);
+            let letter = $(currentLetters[letterIndex(wordIndex)]);
             const char = String.fromCharCode(event.which).toLowerCase();
             (letter.text() === char) ? correct(letter) : incorrect(letter);
-            letterIndex++;
             moveCursor(letter, true);
         }
     }
@@ -277,27 +274,22 @@ $(function() {
             }
             wordIndex++;
             lettersInWord(wordIndex);
-            letterIndex = 0;
             moveCursor(currentLetters[0], false);
         }
     }
 
     function backspace() {
-        if (letterIndex === 0 && wordIndex > 0) {
+        if (letterIndex(wordIndex) === 0 && wordIndex > 0) {
             if (!isWordCorrect(wordIndex - 1)) {
                 wordIndex--;
                 getWordDiv(wordIndex).removeClass('underline');
                 lettersInWord(wordIndex);
-                letterIndex = currentLetters.length;
                 const lettersTyped = getClassesInWord(wordIndex);
-                letterIndex = lettersTyped.length;
                 moveCursor(lettersTyped[lettersTyped.length - 1], true);
             }
         } else {
-            // TODO: Skip entire word if CTRL is held
-            const prevLetter = $(currentLetters[letterIndex - 1]);
+            const prevLetter = $(currentLetters[letterIndex(wordIndex) - 1]);
             prevLetter.removeClass();
-            if (letterIndex > 0) letterIndex--;
             moveCursor(prevLetter, false);
         }
     }
@@ -334,5 +326,9 @@ $(function() {
 
     function wordIsStarted(wordIndex) {
         return getClassesInWord(wordIndex).length > 0;
+    }
+
+    function letterIndex(wordIndex) {
+        return getClassesInWord(wordIndex).length;
     }
 });
