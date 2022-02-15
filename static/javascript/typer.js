@@ -234,12 +234,18 @@ $(function() {
         }
     }
 
+    let cursorY = cursor.offset().top;
+    let cursorX = cursor.offset().left;
+    let curserHasSwitchedLineOnce = false;
+    let curserHasSwitchedLineTwice = false;
+
     function lettersInWord(wordIndex) {
         currentLetters = getWordDiv(wordIndex).find('letter');
     }
     
     let mistakes = 0;
     let correctWords = 0;
+    
 
     $(window).on('keydown', function(event) {
         // a-z
@@ -275,6 +281,17 @@ $(function() {
             wordIndex++;
             lettersInWord(wordIndex);
             moveCursor(currentLetters[0], false);
+        }
+        if (cursor.offset().top !== cursorY && !curserHasSwitchedLineOnce) {
+            curserHasSwitchedLineOnce = true;
+        } else if (curserHasSwitchedLineOnce && !curserHasSwitchedLineTwice) {
+            cursorY = cursor.offset().top;
+            curserHasSwitchedLineTwice = true;
+        }
+        
+        if (cursor.offset().left == cursorX && curserHasSwitchedLineTwice) {
+            cursor.offset({top: cursorY});
+            wordsDiv.css({marginTop: '-=50px'});
         }
     }
 
