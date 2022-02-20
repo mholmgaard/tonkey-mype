@@ -1,4 +1,4 @@
-# Project Pomelo
+# PoC clone of monkeytype
 
 ## Setup
 ```commandline
