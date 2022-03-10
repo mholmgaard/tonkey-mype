@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     const timer = $("#timer");
     const cursor = jQuery('<span>', { id: "cursor", text: "|" });
     const listOfWords = [
@@ -247,8 +247,16 @@ $(function() {
     let mistakes = 0;
     let correctWords = 0;
 
+    let firstKeyPressed = false;
+
 
     $(window).on('keydown', function (event) {
+        if (!firstKeyPressed) {
+            firstKeyPressed = true;
+            timer.text(30);
+            startTimer();
+        }
+
         if (parseInt(timer.text()) > 0) {
             // a-z
             if (event.which >= 65 && event.which <= 90) {
@@ -352,4 +360,14 @@ $(function() {
     function letterIndex(wordIndex) {
         return getClassesInWord(wordIndex).length;
     }
+
+    function startTimer() {
+        var timeleft = parseInt(timer.text() - 1);
+        setInterval(function () {
+            if (timeleft >= 0) {
+                timer.html(timeleft);
+            }
+            timeleft -= 1;
+        }, 1000);
+    };
 });

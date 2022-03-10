@@ -19,6 +19,8 @@ body {
 #timer {
     color: #53b082;
     margin: 4px;
+    position: absolute;
+    margin-top: -50px;
 }
 
 .word {
