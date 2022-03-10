@@ -1,5 +1,6 @@
 $(function() {
-    const cursor = jQuery('<span>', { id: "cursor", text: "|"});
+    const timer = $("#timer");
+    const cursor = jQuery('<span>', { id: "cursor", text: "|" });
     const listOfWords = [
         "the",
         "be",
@@ -217,13 +218,13 @@ $(function() {
     function createWords(words) {
         for (let i = 0; i < words.length; i++) {
             const word = words[i];
-            
+
             // Create div for each word
             jQuery('<div>', {
                 id: words[i],
                 class: 'word',
             }).appendTo(wordsDiv);
-    
+
             // Append each word with a span of its chars
             for (let j = 0; j < word.length; j++) {
                 const char = word.charAt(j);
@@ -242,23 +243,25 @@ $(function() {
     function lettersInWord(wordIndex) {
         currentLetters = getWordDiv(wordIndex).find('letter');
     }
-    
+
     let mistakes = 0;
     let correctWords = 0;
-    
 
-    $(window).on('keydown', function(event) {
-        // a-z
-        if (event.which >= 65 && event.which <= 90) {
-            type(event);
-        }
 
-        if (event.which === 32) {
-            space();
-        }
+    $(window).on('keydown', function (event) {
+        if (parseInt(timer.text()) > 0) {
+            // a-z
+            if (event.which >= 65 && event.which <= 90) {
+                type(event);
+            }
 
-        if (event.which === 8) {
-            backspace();
+            if (event.which === 32) {
+                space();
+            }
+
+            if (event.which === 8) {
+                backspace();
+            }
         }
     });
 
@@ -288,10 +291,11 @@ $(function() {
             cursorY = cursor.offset().top;
             curserHasSwitchedLineTwice = true;
         }
-        
+
         if (cursor.offset().left == cursorX && curserHasSwitchedLineTwice) {
-            cursor.offset({top: cursorY});
-            wordsDiv.css({marginTop: '-=50px'});
+            // Consider deleting top row of words instead.
+            cursor.offset({ top: cursorY });
+            wordsDiv.css({ marginTop: '-=50px' });
         }
     }
 
@@ -330,11 +334,11 @@ $(function() {
 
     function isWordCorrect(wordIndex) {
         const wordDiv = getWordDiv(wordIndex);
-        return wordDiv.find('.correct').length  === wordDiv.attr('id').length;
+        return wordDiv.find('.correct').length === wordDiv.attr('id').length;
     }
 
     function wordIsFinished(wordIndex) {
-        return getClassesInWord(wordIndex).length  === getWordDiv(wordIndex).attr('id').length;
+        return getClassesInWord(wordIndex).length === getWordDiv(wordIndex).attr('id').length;
     }
 
     function getClassesInWord(wordIndex) {
