@@ -254,7 +254,7 @@ $(function () {
 
 
     $(window).on('keydown', function (event) {
-        if (!firstKeyPressed) {
+        if (!firstKeyPressed && event.which >= 65 && event.which <= 90) {
             firstKeyPressed = true;
             // TODO: Time to text should have options, like: 30, 60, 90 or 120.
             timer.text(30);
