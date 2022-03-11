@@ -1,5 +1,8 @@
 $(function () {
     const timer = $("#timer");
+    const result = $("#result");
+    result.hide();
+
     const cursor = jQuery('<span>', { id: "cursor", text: "|" });
     const listOfWords = [
         "the",
@@ -253,6 +256,7 @@ $(function () {
     $(window).on('keydown', function (event) {
         if (!firstKeyPressed) {
             firstKeyPressed = true;
+            // TODO: Time to text should have options, like: 30, 60, 90 or 120.
             timer.text(30);
             startTimer();
         }
@@ -367,7 +371,21 @@ $(function () {
             if (timeleft >= 0) {
                 timer.html(timeleft);
             }
+            if (timeleft === 0) {
+                timer.remove();
+                $("#words-container").remove();
+                showResult();
+                return;
+            }
             timeleft -= 1;
         }, 1000);
     };
+
+    function showResult() {
+        $("#words-correct").text(correctWords);
+        $("#words-incorrect").text(mistakes);
+        // TODO: Multiplying with 2 obviously only works as long as out time is fixed to 30. 
+        $("#wpm").text(correctWords * 2);
+        result.show();
+    }
 });
